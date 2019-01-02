@@ -1,0 +1,16 @@
+.swiper-container{
+  width: 10rem;
+  .swiper-button-next,.swiper-button-prev{
+    background-size: contain;
+    width: 13px;
+    background-color:#eee;
+  }
+  .swiper-wrapper{
+       .swiper-slide{
+           img{
+               height: 130px;
+
+          }
+       }
+  }
+}
