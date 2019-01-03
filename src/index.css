@@ -13,3 +13,4 @@ code {
     monospace;
 }
 .qcs-content{margin-top:84px;}
+.qcs-header{z-index: 2}

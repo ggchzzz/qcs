@@ -1,0 +1,19 @@
+.shortname{
+    padding-bottom: .26667rem;
+    font-size: .32rem;
+    color: #919090;
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: keep-all;
+    text-overflow: ellipsis
+}
+.ant-progress{
+    .ant-progress-outer{
+.ant-progress-inner{
+            background-color: #f0e5e5 !important;
+            .ant-progress-bg{
+             background-color: #ff6692 !important;
+            }
+        }
+    }
+}

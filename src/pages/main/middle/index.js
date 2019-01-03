@@ -24,7 +24,8 @@ class Middle extends Component{
           })
       })
       axios.get('item/ws/group_list?current_page=1&page_size=24&group_id=12780&device_id=89a67640-0c22-11e9-bfc9-0376c9d7a9ce').then(resp=>{
-          this.setState({
+        console.log(resp.data.data.item_list) ; 
+        this.setState({
               twelvePlace:resp.data.data.item_list,
           })
       })
@@ -49,7 +50,13 @@ class Middle extends Component{
                 <li><img alt="" style={{"width":"10rem"}} src={this.state.sixplace}/></li>
                 {
                          this.state.twelvePlace.map(item=>{
-                             return <li style={{"float":"right","position":"abolute","width":"33%","border":"2px solid red"}} key={item.item_id}  ><img  alt=" " style={{"width":"3rem","height":"3rem"}} src={item.over_image_url}/></li>
+                             return <li  style={{"float":"left","width":"33%","border":"2px solid red"}} key={item.item_id}  ><img  alt=" 111" style={{"width":"3rem","height":"3rem"}} src={item.over_image_url}/>
+                             <div className="sellOutTiitle">
+                                 <span>{item.item_long_name.slice(0,21)}</span>
+                                 {/* <span className="ccc"></span> */}            
+                             </div>
+                             <div style={{"display":"flex",'justifyContent':"space-around"}}><span style={{"color":"red","fontSize":"0.3rem"}}>{item.max_market_price/100}</span><span>{item.max_price/100}</span><span>1111</span></div>
+                             </li>
                          })
                      }
                  </ul>

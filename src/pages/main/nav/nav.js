@@ -65,9 +65,9 @@ class Nav extends Component{
           </div>
           <div style={{backgroundImage:'url('+this.state.bg+')'}}>
           <p style={{"display":"flex","justifyContent":"space-between"}}><span style={{ "fontWeight":"boild", "color":"white","fontSize":"0.4rem"}}>{`今日秒杀`+this.state.Retime}</span><span style={{"color":"white","fontSize":"0.4rem","fontWeight":'boild'}}>更多好货</span></p>
-          <ul style={{"display":"flex","overflowY":"scroll"}} >{
+          <ul style={{"display":"flex","overflowY":"scroll","margin":"10px"}} >{
               this.state.swiper.map(item=>{
-                  return <li key={item.item_id}  style={{"margin":"10px","backgroundColor":"white"}}><img style={{"width":"2.5rem","height":"3rem"}} alt="swiper" src={item.image_url}/><div className="ellipsis">{item.item_short_name}</div ><p style={{"display":"flex","justifyContent":"space-around"}}><span></span>{item.hasOwnProperty("market_price")===false?" ": item.market_price/100}<span>{item.promotion_price/100}</span></p></li>
+                  return <li key={item.item_id}  style={{"margin":"3px","backgroundColor":"white"}}><img style={{"width":"2.5rem","height":"3rem"}} alt="swiper" src={item.image_url}/><div className="ellipsis">{item.item_short_name}</div ><p style={{"display":"flex","justifyContent":"space-around"}}><span style={{"fontSize":"0.3rem","fontWeight":"bold","color":"red"}}>{item.hasOwnProperty("market_price")===false?" ": "￥"+item.market_price/100}</span><span style={{"textDecoration":"line-through"}}>{item.hasOwnProperty("market_price")===true?item.promotion_price/100:"￥"+item.promotion_price/100}</span></p></li>
               })
           }
 

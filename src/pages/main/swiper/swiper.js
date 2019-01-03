@@ -1,11 +1,12 @@
 import  React ,{Component } from 'react';
+import {Link} from 'react-router-dom'
 import axios from 'axios';
 import Swiper from  'react-id-swiper';
 import './swiper.scss'
 class Swiperlocal extends Component{
-    
-    constructor(){
-        super();
+     
+    constructor(props){
+        super(props);
         this.state={
             swiperitem:[],
             swipernext:[],
@@ -24,6 +25,8 @@ class Swiperlocal extends Component{
             footerone:[],
         }
     }
+  
+
     componentDidMount(){
         axios.get('item/ws/group_list?current_page=1&page_size=24&group_id=12782&device_id=89a67640-0c22-11e9-bfc9-0376c9d7a9ce').then(resp=>{
             // console.log(resp);
@@ -32,7 +35,7 @@ class Swiperlocal extends Component{
             })
         })
         axios.get('aladdin/get_batch_data?codes=[%22new_header%22,%22new_Home_topBig_forcase_180105_1%22,%22new_Home_4navs_180105_1%22,%22new_Home_coupon_180105_4%22,%22Home_pingo_170505_5%22,%22Home_AboveTopic_activity_170505_7%22,%22Home_TopicCase_170505_7%22,%22Home_CategaryNavs_170505_7%22]&version=&app_channel=wap&plat=wap&access_token=&device_id=89a67640-0c22-11e9-bfc9-0376c9d7a9ce').then(resp=>{
-            console.log(resp.data.data.Home_CategaryNavs_170505_7.datas);
+            // console.log(resp.data.data.Home_CategaryNavs_170505_7.datas);
             this.setState({
                 footer:resp.data.data.Home_TopicCase_170505_7.datas,
                 footerone:resp.data.data.Home_CategaryNavs_170505_7.datas
@@ -80,6 +83,7 @@ class Swiperlocal extends Component{
         })
     }
     render(){
+        
         const params = {
             autoplay:true,
             observer:true,
@@ -124,7 +128,7 @@ class Swiperlocal extends Component{
            <ul style={{"width":"10rem"}}>
                {
                    this.state.sixplace.map((item,index)=>{
-                                        return <li key={index}  style={{"width":"3.3rem","float":"left",'border':"2px solid red"}}><img  style={{"width":"3.2rem","height":"114px"}} alt="  " src={ index<6?item.over_image_url:" "}/></li>
+                                        return <li key={index}  style={{"width":"3.3rem","float":"left",'border':"2px solid red"}}><img  style={index<6?{"width":"3.2rem","height":"114px"}:{"display":"none"}} alt="  " src={item.over_image_url}/></li>
                    })
                }
            </ul>
@@ -136,6 +140,7 @@ class Swiperlocal extends Component{
                    })
                }
            </ul>
+        <Link to="/detail"   > <div  ><img alt=" " src={"//image.watsons.com.cn//upload/3965e404.jpg"} style={{"width":"10rem","height":"150px"}}/></div></Link>
            <div><  img   alt=' '  style={{"width":"10rem","height":"150px"}} src={this.state.skinthree}/></div>
            <ul>
                {
