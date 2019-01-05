@@ -5,11 +5,14 @@ import Global from "../pages/global";
 import Life from "../pages/life";
 import Mask from '../pages/mask';
 import Detail from "../pages/main/detail"
+import Person from '../components/common/person/person'
 const App=()=>(
+
     <BrowserRouter>
     <div>
         <div className="qcs-content">
         <Switch>
+            <Route path='/person' component={Person}></Route>
             <Route path='/' exact component={Main}></Route>
             <Route path='/global'  component={Global}></Route>
             <Route path='/life'  component={Life}></Route>

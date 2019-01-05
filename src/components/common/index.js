@@ -1,14 +1,18 @@
 import React ,{Component} from 'react'
-import {NavLink} from 'react-router-dom'
+import {NavLink,Link}  from 'react-router-dom'
 import './header.scss'
 import {Row,Col, Icon,Input} from 'antd'
 class Header extends Component{
+    constructor(){
+        super();
+    }
+  
     render(){
         return (
             <div className='qcs-header'>
             <div className="qcs-search">
                 <Row className="header-row">
-                         <Col span={2} ><Icon className="qcs-user" type="user"/></Col>
+                        <Link to="/person"><Col span={2}  ><Icon    className="qcs-user" type="user"/></Col></Link> 
 						<Col span={20} style={{"paddingLeft":"42px"}}><Input prefix={<Icon type="search"/>}/></Col>
 						<Col span={2}><div><Icon className="qcs-shopping" type="shopping-cart"/></div></Col>
                 </Row>

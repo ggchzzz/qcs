@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import axios from 'axios';
-import {Icon} from 'antd';
+import {Icon,BackTop} from 'antd';
 import './style.scss';
 
 class List extends Component{
@@ -151,6 +151,11 @@ class List extends Component{
 				</ul>
 				<div className="loading" style={this.state.type && !this.state.end?{'display':'block'}:{'display':'none'}}><Icon type="sync" spin />正在加载中……</div>
 				{this.state.end?<div className="end">我是有底线的……</div>:''}
+				<div>
+					<BackTop>
+					<div className="ant-back-top-inner">UP</div>
+					</BackTop>
+				</div>
 			</div>
 		)
 	}
