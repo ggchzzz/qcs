@@ -19,7 +19,7 @@ class Banner extends Component{
     render(){
         return <div>
                 <img src={this.state.banner}  alt="顶图"style={{"width":"10rem"}}/>
-                <div style={{"backgroundImage":"url("+'//asset.watsons.com.cn/act/static/images/mask-center/442af5844f137440b999ff5c7.png'+")", 'backgroundRepeat':"no-repeat","backgroundSize":'cover','height':'2.3rem'}}>
+                <div style={{"backgroundImage":"url(//asset.watsons.com.cn/act/static/images/mask-center/442af5844f137440b999ff5c7.png)", 'backgroundRepeat':"no-repeat","backgroundSize":'cover','height':'2.3rem'}}>
                     <div style={{"position":"relative","paddingTop":".4rem","marginLeft":"3.5rem",'zIndex':"1"}}> 
                         <p style={{"fontSize":'.48rem',"fontWeight":700,'textDecoration':"underline"}}> 登录查看抢购资格</p>
                         <p style={{"fontSize":".3rem","marginTop":".2rem"}}> 抢购资源可用于购买本活动优惠价商品</p> 

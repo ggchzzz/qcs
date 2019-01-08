@@ -1,19 +1,83 @@
-import React,{Component} from 'react'
+import React from 'react'
 import {
-    Form, Icon, Input, Button, Checkbox,
+    Form, Icon, Input, Button
   } from 'antd';
+import axios from 'axios'
 import './style.scss'
   class Person extends React.Component {
+    constructor(){
+      super();
+      this.state={
+        username:'',
+        disabled:false,
+        Buttontext:'发送验证码'
+      }
+    }
+    disabled=()=>{
+      
+    }
     handleSubmit = (e) => {
       e.preventDefault();
       this.props.form.validateFields((err, values) => {
+        var params=new URLSearchParams();
+        console.log(values.userName,values.phoneIdentify);
+        params.append('phone',values.userName);
+        params.append('smsCode',values.phoneIdentify);
+        console.log('Received values of form: ', values);
         if (!err) {
-          console.log('Received values of form: ', values);
+         axios({
+           method:'post',
+           url:'http://192.168.2.251:7001/user/login',
+           data:params,
+         }).then(resp=>{
+           if(resp.data.code===0){
+             console.log(this.props);
+             localStorage['token']=resp.data.data.token;
+             this.props.history.push('/center');
+           }
+         })
+         
         }
       });
     }
   back=()=>{
     console.log(this.props.history.replace('/'));
+  }
+  componentWillUnmount(){
+    this.setState=(state,callback)=>{
+        return;
+    }
+}
+  number=(ev)=>{
+    console.log(ev.target.value);
+    this.setState({
+      username:ev.target.value,
+    })
+  }
+  send=()=>{
+    axios.get("http://192.168.2.251:7001/sms/addSms?phone="+this.state.username+"").then(resp=>{
+      console.log(resp.data);
+      axios.get("http://192.168.2.251:7001/sms/querySms?phone="+this.state.username+"").then(resp=>{
+        console.log(resp.data);
+        this.setState({
+          disabled:true,
+        })
+        let i=60;
+        let timer=setInterval(() => {
+        this.setState({
+          Buttontext:'重发('+i+'s)',
+        })
+        if(i<=0){
+          this.setState({
+            Buttontext:"获取验证码",
+            disabled:false,
+          })
+          clearInterval(timer);
+        }
+        i--;
+      }, 1000);
+      })
+     });
   }
     render() {
       const { getFieldDecorator } = this.props.form;
@@ -24,10 +88,12 @@ import './style.scss'
         <Form onSubmit={this.handleSubmit} className="login-form">
           <Form.Item>
             {getFieldDecorator('userName', {
-              rules: [{ required: true, message: '请输入手机号!' }],
+              rules: [{ required: true, message: '请输入手机号!' },
+              // {pattern:/^187\d[8]$/,message:"请输入正确的格式"},
+            ],
             })(
-              <Input  placeholder="请输入手机号" />
-            )}<img/>
+              <Input onInput={this.number}placeholder="请输入手机号" />
+            )}
           </Form.Item>
           <Form.Item>
             {getFieldDecorator('pictureIdentify', {
@@ -41,7 +107,7 @@ import './style.scss'
               rules: [{ required: true, message: '请输入手机验证码'}],
             })(
               <Input  placeholder="请输入验证码" />
-            )}<Button >发送验证码</Button>
+            )}<Button disabled={this.state.disabled} onClick={this.send}>{this.state.Buttontext}</Button>
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" className="login-form-button">

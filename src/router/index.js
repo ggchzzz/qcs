@@ -5,6 +5,7 @@ import Global from "../pages/global";
 import Life from "../pages/life";
 import Mask from '../pages/mask';
 import Detail from "../pages/main/detail"
+import Center from '../pages/center'
 import Person from '../components/common/person/person'
 const App=()=>(
 
@@ -18,6 +19,7 @@ const App=()=>(
             <Route path='/life'  component={Life}></Route>
             <Route path='/mask'  component={Mask}></Route>
             <Route path='/detail' component={Detail}></Route>
+            <Route path='/center' component={Center}></Route>
         </Switch>
         </div>
     </div>

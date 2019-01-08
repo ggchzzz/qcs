@@ -3,9 +3,6 @@ import {NavLink,Link}  from 'react-router-dom'
 import './header.scss'
 import {Row,Col, Icon,Input} from 'antd'
 class Header extends Component{
-    constructor(){
-        super();
-    }
   
     render(){
         return (
