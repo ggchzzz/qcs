@@ -1,4 +1,5 @@
 .list-con{margin-top: -84px;
+    width: 10rem;
     h1{
         width: 100%; height: 40px; line-height: 40px; font-size: 20px; font-weight: bold;
         border-bottom:1px solid #ccc;padding-left:0.5rem;
@@ -16,11 +17,26 @@
         li{
             width: 45%; height:auto; border:1px solid #ccc;
             img{width: 100%;}
+            .format{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            
+            }
         }
     }
     .loading{
         text-align: center; color:dodgerblue; font-size: 20px;
     }
     .end{text-align: center; color:deeppink; font-size: 20px;}
+    .ant-back-top-inner{
+        background-color: lightseagreen;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        text-align: center;
+    }
 
 }

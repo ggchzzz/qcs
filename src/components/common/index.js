@@ -11,7 +11,7 @@ class Header extends Component{
                 <Row className="header-row">
                         <Link to="/person"><Col span={2}  ><Icon    className="qcs-user" type="user"/></Col></Link> 
 						<Col span={20} style={{"paddingLeft":"42px"}}><Input prefix={<Icon type="search"/>}/></Col>
-						<Col span={2}><div><Icon className="qcs-shopping" type="shopping-cart"/></div></Col>
+					<Link to="/shopping"><Col span={2}><div><Icon className="qcs-shopping" type="shopping-cart"/></div></Col></Link>
                 </Row>
             </div>
             <nav className='qcs-menu'>

@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 import {Icon,BackTop} from 'antd';
 import './style.scss';
 
@@ -49,7 +50,7 @@ class List extends Component{
 			//当前页面的总高度
 			let scrollHeight = document.body.scrollHeight;
 			
-			console.log(scrollHeight-scrollTop +':'+windowHeight);
+			// console.log(scrollHeight-scrollTop +':'+windowHeight);
 			if(scrollHeight-scrollTop <= windowHeight){
 				//获取数据
 				_this.moreData(_this.state.page+1);	
@@ -78,7 +79,7 @@ class List extends Component{
 					let oldArr = this.state.listArr;
 					let newArr = [];
 					newArr = oldArr.concat(res.data.data.item_list);
-					console.log(newArr);
+					// console.log(newArr);
 					setTimeout(()=>{
 						this.setState({
 							listArr:newArr,
@@ -145,7 +146,11 @@ class List extends Component{
 				<ul className="list_item">
 				{
 					this.state.listArr.map((item,index)=><li key={index}>
-						<img src={item.over_image_url} alt={item.item_short_name}/>
+					<div>
+						<Link to={{ pathname:'/cart',state:{data:item}}} ><img src={item.over_image_url} alt={item.item_short_name}/></Link>
+						<div className="format">{item.item_long_name}</div>
+						<div style={{"color":"red",'display':"flex",'justifyContent':"space-around","bottom":"0"}}><span>{"￥"+item.max_price/100}</span><span>{"￥"+item.max_market_price/100}</span></div>
+					</div>	
 					</li>)
 				}
 				</ul>

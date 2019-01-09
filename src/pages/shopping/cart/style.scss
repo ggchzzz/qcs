@@ -1,0 +1,25 @@
+.cart{
+    width:10rem;
+    position: absolute;
+    top:0px;
+    img{
+        width:10rem;
+        height: auto;
+    }
+}
+.footer{
+    position: fixed;
+    bottom: 0px;
+    display: flex;
+    justify-content: space-around;
+    div{
+        background-color:#fe91ae;
+        width:5rem;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        font-weight: bold;
+        color:whitesmoke;
+        font-size: .42667rem;
+    }
+}

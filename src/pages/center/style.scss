@@ -1,0 +1,19 @@
+.center{
+    position: relative;
+    top:-10px;
+    .center_div{
+        position: relative;
+        background-color: aqua;
+        width: 58px;
+        height: 58px;
+        margin: 0 auto;
+    }
+    .center_image{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        top:50%;
+
+    }
+}

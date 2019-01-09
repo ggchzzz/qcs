@@ -7,6 +7,8 @@ import Mask from '../pages/mask';
 import Detail from "../pages/main/detail"
 import Center from '../pages/center'
 import Person from '../components/common/person/person'
+import Shopping from '../pages/shopping'
+import Cart from '../pages/shopping/cart'
 const App=()=>(
 
     <BrowserRouter>
@@ -20,6 +22,8 @@ const App=()=>(
             <Route path='/mask'  component={Mask}></Route>
             <Route path='/detail' component={Detail}></Route>
             <Route path='/center' component={Center}></Route>
+            <Route path='/shopping' component={Shopping}></Route>
+            <Route path="/cart"  component={Cart}></Route>
         </Switch>
         </div>
     </div>

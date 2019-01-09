@@ -20,7 +20,6 @@ import './style.scss'
       e.preventDefault();
       this.props.form.validateFields((err, values) => {
         var params=new URLSearchParams();
-        console.log(values.userName,values.phoneIdentify);
         params.append('phone',values.userName);
         params.append('smsCode',values.phoneIdentify);
         console.log('Received values of form: ', values);
