@@ -1,6 +1,8 @@
 import React,{Component} from 'react';
 import axios from 'axios'
 import './style.scss'
+import { Icon,Badge} from 'antd';
+import {Link} from 'react-router-dom';
 class Cart extends Component{
     constructor(props){
         super(props);
@@ -9,13 +11,85 @@ class Cart extends Component{
             coupons:[],
             ul_item:[],
             footer:[],
+            item_obj:{},
+            item_id:'',
+            app_price:0,
+            market_price:0,
+            sucess:false,
+            total:0,
+            img_src:'',
 
         }
     }
+    
     componentWillUnmount(){
         this.setState=(state,callback)=>{
-                return;
+            return;
         }
+    }
+    componentDidMount(){
+        let item=this.props.location.state.data;
+        console.log(item);
+        this.setState({
+        item_id:item.item_id,
+        app_price:item.max_app_price,
+        market_price:item.max_market_price,
+        })
+        axios.get('/item/reviews/list?item_id='+item.item_id+'&count=1&offset=0').then((res)=>{
+			console.log(res.data.data.reviews[0]);
+			this.setState({
+				item_obj:res.data.data.reviews[0],
+			})
+        })
+        this.totalFunc();
+    }
+    totalFunc=()=>{
+        let arr=JSON.parse(localStorage.getItem('cart'));
+        var total=0;
+        if(arr!=null && arr.length){
+            arr.map(item=>{
+                total+=item.num;
+            })
+        }
+        this.setState({
+            total:total
+        })
+    }
+    addCartFunc=()=>{
+        let timeout='';
+        this.setState({
+            sucess:true
+        })
+        let data=[];
+        let flag=true;
+        let arr=JSON.parse(localStorage.getItem("cart"));
+        if(arr !=null && arr.length){
+            arr.map(item=>{
+                if(item.id===this.state.item_id){
+                    item.num++;
+                    flag=false;
+                }
+                data.push(item);
+            })
+        }
+        if(flag){
+            data.push({
+                id:this.state.item_id,
+                img_src:this.state.item_obj.sku_img_url,
+
+                app_price:this.state.app_price,
+                market_price:this.state.market_price,
+                num:1,
+            })
+        }
+        localStorage.setItem('cart',JSON.stringify(data));
+        clearTimeout(timeout);
+        timeout=setTimeout(()=>{
+            this.setState({
+                sucess:false
+            })
+        },1000);
+        this.totalFunc();
     }
     componentWillMount(){
         axios.get('https://h5.watsons.com.cn/act/mop/item/coupons?item_id='+ this.state.itemdata.item_id+'&count=30&offset=0').then(resp=>{
@@ -35,6 +109,8 @@ class Cart extends Component{
         })
     }
     render(){
+        console.log();
+
         return <div  className="cart">
                 <div style={{"height":"30px"}} ><p  style={{'textAlign':'center',"width":"10rem","fontSize":".48rem","color":"#4a4a4a",'borderBottom':"1px solid #eee"}}>{this.state.itemdata.item_name}</p></div>
                 <div><img alt=''  src={this.state.itemdata.over_image_url}/></div>
@@ -78,8 +154,19 @@ class Cart extends Component{
                         })
                     }
                 </ul>
+                <div className="iconfooter">
+                    <div>
+                        <Icon type="home"/>
+                        <span>首页</span>
+                    </div>
+                    <div>
+                    <Badge count={this.state.total}>
+                     <Link to="/order" ><Icon type="shopping-cart" />  </Link> 
+                    </Badge>
+                    </div>   
+                </div>
                 <div className="footer">
-                    <div>加入购物车</div>
+                    <div onClick={this.addCartFunc}>加入购物车</div>
                     <div>立即购买</div>
                 </div>
                 </div>

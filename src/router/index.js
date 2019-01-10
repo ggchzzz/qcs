@@ -9,12 +9,14 @@ import Center from '../pages/center'
 import Person from '../components/common/person/person'
 import Shopping from '../pages/shopping'
 import Cart from '../pages/shopping/cart'
+import Order from '../pages/shopping/order'
 const App=()=>(
 
     <BrowserRouter>
     <div>
         <div className="qcs-content">
         <Switch>
+            <Route path='/order'  exact component={Order}></Route>
             <Route path='/person' component={Person}></Route>
             <Route path='/' exact component={Main}></Route>
             <Route path='/global'  component={Global}></Route>
